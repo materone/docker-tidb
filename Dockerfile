@@ -2,7 +2,7 @@ FROM jeanblanchard/alpine-glibc
 
 VOLUME /opt
 
-RUN apk add --update wget git make ; \
+RUN apk add --update wget git make curl ; \
 	cd /opt ; \
 	wget --no-check-certificate -c https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz ; \
 	tar zxvf go1.5.1.linux-amd64.tar.gz ; \
@@ -14,7 +14,7 @@ RUN apk add --update wget git make ; \
 	cd $GOPATH/src/github.com/pingcap/tidb ; \
 	make ; make server ; cp tidb-server/tidb-server /usr/bin/ ; \
 	apk del run-parts openssl lua5.2-libs lua5.2 ncurses-terminfo-base ncurses-widec-libs lua5.2-posix \
-ca-certificates libssh2 curl expat pcre git wget make
+ca-certificates libssh2 curl expat pcre git make
 
 EXPOSE 4000
 
